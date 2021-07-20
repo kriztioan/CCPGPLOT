@@ -11,4 +11,4 @@ $(PROG) : $(OBJ_FILES)
 	$(CXX) -c $(CPPFLAGS) $<
 
 clean:
-	$(RM) -f *.o $(PROG)
+	$(RM) *.o $(PROG)

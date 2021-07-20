@@ -8,10 +8,9 @@ $(LIB_FILES) : $(OBJ_FILES)
 %.o: %.cpp
 	$(CXX) -c $<
 
-clean:
-	$(RM) -f *.o *.a
-	$(MAKE) -C demo clean
-
 demo: $(LIB_FILES)
-	$(MAKE) -C demo
-	
+	$(MAKE) -C demo	
+
+clean:
+	$(RM) *.o *.a
+	$(MAKE) -C demo clean
