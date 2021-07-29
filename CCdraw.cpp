@@ -14,7 +14,7 @@
 #include <cstdlib>
 
 ccdraw::ccdraw() {
-  plots = 0;
+  plots = NULL;
 
   deviceID = -1;
   Nhardcopies = 0;
@@ -34,7 +34,8 @@ ccdraw::ccdraw() {
 }
 
 ccdraw::~ccdraw() {
-  delete[] plots;
+  if(plots)
+    delete[] plots;
 
   if (deviceID != -1) {
     if (!KeepAlive)
@@ -43,7 +44,6 @@ ccdraw::~ccdraw() {
 }
 
 void ccdraw::add(ccplot &p) {
-
   ccplot *tmp = new ccplot[Size + 1];
   for (int i = 0; i < Size; i++)
     tmp[i] = plots[i];

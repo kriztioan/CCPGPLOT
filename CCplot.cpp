@@ -29,12 +29,12 @@ ccplot::ccplot() {
 }
 
 ccplot::~ccplot() {
-  delete Title;
-  delete Xlabel;
-  delete Ylabel;
+  delete[] Title;
+  delete[] Xlabel;
+  delete[] Ylabel;
 
-  delete Xlayout;
-  delete Ylayout;
+  delete[] Xlayout;
+  delete[] Ylayout;
 
   delete[] Curves;
 }
@@ -53,15 +53,15 @@ ccplot::ccplot(ccplot const &other) {
 
 ccplot &ccplot::operator=(ccplot const &other) {
   if (this != &other) {
-    delete Title;
+    delete[] Title;
     Title = strcpy(new char[strlen(other.Title) + 1], other.Title);
-    delete Xlabel;
+    delete[] Xlabel;
     Xlabel = strcpy(new char[strlen(other.Xlabel) + 1], other.Xlabel);
-    delete Ylabel;
+    delete[] Ylabel;
     Ylabel = strcpy(new char[strlen(other.Ylabel) + 1], other.Ylabel);
-    delete Xlayout;
+    delete[] Xlayout;
     Xlayout = strcpy(new char[strlen(other.Xlayout) + 1], other.Xlayout);
-    delete Ylayout;
+    delete[] Ylayout;
     Ylayout = strcpy(new char[strlen(other.Ylayout) + 1], other.Ylayout);
 
     delete[] Curves;

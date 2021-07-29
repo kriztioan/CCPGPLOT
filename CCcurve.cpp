@@ -32,8 +32,8 @@ cccurve::cccurve() {
 }
 
 cccurve::~cccurve() {
-  delete X;
-  delete Y;
+  delete[] X;
+  delete[] Y;
 }
 
 cccurve::cccurve(cccurve const &other) {
@@ -61,8 +61,8 @@ cccurve::cccurve(cccurve const &other) {
 
 cccurve &cccurve::operator=(cccurve const &other) {
   if (this != &other) {
-    delete X;
-    delete Y;
+    delete[] X;
+    delete[] Y;
 
     X = new float[other.Xsize];
     Y = new float[other.Ysize];
@@ -90,7 +90,7 @@ cccurve &cccurve::operator=(cccurve const &other) {
 }
 
 void cccurve::x(int size, float *x) {
-  delete X;
+  delete[] X;
   X = new float[size];
   for (int i = 0; i < size; i++)
     X[i] = x[i];
@@ -108,7 +108,7 @@ float *cccurve::x() { return (X); }
 float *cccurve::y() { return (Y); }
 
 void cccurve::y(int size, float *y) {
-  delete Y;
+  delete[] Y;
   Y = new float[size];
   for (int i = 0; i < size; i++)
     Y[i] = y[i];
