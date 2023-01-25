@@ -6,7 +6,7 @@ $(LIB_FILES) : $(OBJ_FILES)
 	$(AR) -q $(LIB_FILES) *.o
 
 %.o: %.cpp
-	$(CXX) -c $<
+	$(CXX) -c $(INC_PGPLOT) $<
 
 demo: $(LIB_FILES)
 	$(MAKE) -C demo	
