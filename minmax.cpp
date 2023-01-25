@@ -14,7 +14,7 @@ enum MIN_MAX { MIN, MAX };
 int minmax(int n, float *array, float *min_max) {
 
   int i = 0, nan = 0;
-  while (!finite(array[i])) {
+  while (!std::isfinite(array[i])) {
     ++nan;
     ++i;
   }
@@ -22,8 +22,8 @@ int minmax(int n, float *array, float *min_max) {
   min_max[MIN] = array[i];
   min_max[MAX] = array[i];
 
-  for (i; i < n; i++) {
-    if (finite(array[i])) {
+  for (; i < n; i++) {
+    if (std::isfinite(array[i])) {
       if (array[i] < min_max[MIN]) {
         min_max[MIN] = array[i];
       } else if (array[i] > min_max[MAX]) {

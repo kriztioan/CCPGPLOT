@@ -108,15 +108,15 @@ void ccdraw::paint() {
           cpgslw(plots[i].curves()[j].lweight());
           cpgsls(plots[i].curves()[j].symbol());
           int k = 0;
-          while (!finite(plots[i].curves()[j].x()[k]) ||
-                 !finite(plots[i].curves()[j].y()[k]))
+          while (!std::isfinite(plots[i].curves()[j].x()[k]) ||
+                 !std::isfinite(plots[i].curves()[j].y()[k]))
             k++;
           float segment_x[2], segment_y[2];
           segment_x[0] = plots[i].curves()[j].x()[k];
           segment_y[0] = plots[i].curves()[j].y()[k++];
-          for (k; k < plots[i].curves()[j].size(); k++) {
-            if (finite(plots[i].curves()[j].x()[k]) &&
-                finite(plots[i].curves()[j].y()[k])) {
+          for (; k < plots[i].curves()[j].size(); k++) {
+            if (std::isfinite(plots[i].curves()[j].x()[k]) &&
+                std::isfinite(plots[i].curves()[j].y()[k])) {
               segment_x[1] = plots[i].curves()[j].x()[k];
               segment_y[1] = plots[i].curves()[j].y()[k];
               cpgline(2, segment_x, segment_y);
@@ -136,8 +136,8 @@ void ccdraw::paint() {
         case 'p':
         default:
           for (int k = 0; k < plots[i].curves()[j].size(); k++) {
-            if (finite(plots[i].curves()[j].x()[k]) &&
-                finite(plots[i].curves()[j].y()[k]))
+            if (std::isfinite(plots[i].curves()[j].x()[k]) &&
+                std::isfinite(plots[i].curves()[j].y()[k]))
               cpgpt1(plots[i].curves()[j].x()[k], plots[i].curves()[j].y()[k],
                      plots[i].curves()[j].symbol());
           }
@@ -211,15 +211,15 @@ void ccdraw::paint() {
             cpgslw(plots[i].curves()[j].lweight());
             cpgsls(plots[i].curves()[j].symbol());
             int k = 0;
-            while (!finite(plots[i].curves()[j].x()[k]) ||
-                   !finite(plots[i].curves()[j].y()[k]))
+            while (!std::isfinite(plots[i].curves()[j].x()[k]) ||
+                   !std::isfinite(plots[i].curves()[j].y()[k]))
               k++;
             float segment_x[2], segment_y[2];
             segment_x[0] = plots[i].curves()[j].x()[k];
             segment_y[0] = plots[i].curves()[j].y()[k];
-            for (k; k < plots[i].curves()[j].size(); k++) {
-              if (finite(plots[i].curves()[j].x()[k]) &&
-                  finite(plots[i].curves()[j].y()[k])) {
+            for (; k < plots[i].curves()[j].size(); k++) {
+              if (std::isfinite(plots[i].curves()[j].x()[k]) &&
+                  std::isfinite(plots[i].curves()[j].y()[k])) {
                 segment_x[1] = plots[i].curves()[j].x()[k];
                 segment_y[1] = plots[i].curves()[j].y()[k];
                 cpgline(2, segment_x, segment_y);
@@ -239,8 +239,8 @@ void ccdraw::paint() {
           case 'p':
           default:
             for (int k = 0; k < plots[i].curves()[j].size(); k++) {
-              if (finite(plots[i].curves()[j].x()[k]) &&
-                  finite(plots[i].curves()[j].y()[k]))
+              if (std::isfinite(plots[i].curves()[j].x()[k]) &&
+                  std::isfinite(plots[i].curves()[j].y()[k]))
                 cpgpt1(plots[i].curves()[j].x()[k], plots[i].curves()[j].y()[k],
                        plots[i].curves()[j].symbol());
             }
@@ -313,7 +313,7 @@ void ccdraw::mulipages() {
   int i = 0, margin = (PagesX * PagesY);
   while (i < Size) {
     int drawn = 0;
-    for (i; i < Size && i < margin; i++) {
+    for (; i < Size && i < margin; i++) {
       drawn++;
       cpgpage();
       cpgsci(plots[i].boxcolor());
@@ -330,15 +330,15 @@ void ccdraw::mulipages() {
           cpgslw(plots[i].curves()[j].lweight());
           cpgsls(plots[i].curves()[j].symbol());
           int k = 0;
-          while (!finite(plots[i].curves()[j].x()[k]) ||
-                 !finite(plots[i].curves()[j].y()[k]))
+          while (!std::isfinite(plots[i].curves()[j].x()[k]) ||
+                 !std::isfinite(plots[i].curves()[j].y()[k]))
             k++;
           float segment_x[2], segment_y[2];
           segment_x[0] = plots[i].curves()[j].x()[k];
           segment_y[0] = plots[i].curves()[j].y()[k++];
-          for (k; k < plots[i].curves()[j].size(); k++) {
-            if (finite(plots[i].curves()[j].x()[k]) &&
-                finite(plots[i].curves()[j].y()[k])) {
+          for (; k < plots[i].curves()[j].size(); k++) {
+            if (std::isfinite(plots[i].curves()[j].x()[k]) &&
+                std::isfinite(plots[i].curves()[j].y()[k])) {
               segment_x[1] = plots[i].curves()[j].x()[k];
               segment_y[1] = plots[i].curves()[j].y()[k];
               cpgline(2, segment_x, segment_y);
@@ -358,8 +358,8 @@ void ccdraw::mulipages() {
         case 'p':
         default:
           for (int k = 0; k < plots[i].curves()[j].size(); k++) {
-            if (finite(plots[i].curves()[j].x()[k]) &&
-                finite(plots[i].curves()[j].y()[k]))
+            if (std::isfinite(plots[i].curves()[j].x()[k]) &&
+                std::isfinite(plots[i].curves()[j].y()[k]))
               cpgpt1(plots[i].curves()[j].x()[k], plots[i].curves()[j].y()[k],
                      plots[i].curves()[j].symbol());
           }
@@ -387,7 +387,7 @@ void ccdraw::mulipages() {
       cpgpap(WindowX, WindowY / WindowX);
       cpgsvp(SurfaceX, 1 - SurfaceX, SurfaceY, 1 - SurfaceY);
       i -= drawn;
-      for (i; (i < margin) && (i < Size); i++) {
+      for (; (i < margin) && (i < Size); i++) {
         cpgpage();
         cpgsci(plots[i].boxcolor());
         cpgswin(plots[i].xmin(), plots[i].xmax(), plots[i].ymin(),
@@ -403,15 +403,15 @@ void ccdraw::mulipages() {
             cpgslw(plots[i].curves()[j].lweight());
             cpgsls(plots[i].curves()[j].symbol());
             int k = 0;
-            while (!finite(plots[i].curves()[j].x()[k]) ||
-                   !finite(plots[i].curves()[j].y()[k]))
+            while (!std::isfinite(plots[i].curves()[j].x()[k]) ||
+                   !std::isfinite(plots[i].curves()[j].y()[k]))
               k++;
             float segment_x[2], segment_y[2];
             segment_x[0] = plots[i].curves()[j].x()[k];
             segment_y[0] = plots[i].curves()[j].y()[k++];
-            for (k; k < plots[i].curves()[j].size(); k++) {
-              if (finite(plots[i].curves()[j].x()[k]) &&
-                  finite(plots[i].curves()[j].y()[k])) {
+            for (; k < plots[i].curves()[j].size(); k++) {
+              if (std::isfinite(plots[i].curves()[j].x()[k]) &&
+                  std::isfinite(plots[i].curves()[j].y()[k])) {
                 segment_x[1] = plots[i].curves()[j].x()[k];
                 segment_y[1] = plots[i].curves()[j].y()[k];
                 cpgline(2, segment_x, segment_y);
@@ -431,8 +431,8 @@ void ccdraw::mulipages() {
           case 'p':
           default:
             for (int k = 0; k < plots[i].curves()[j].size(); k++) {
-              if (finite(plots[i].curves()[j].x()[k]) &&
-                  finite(plots[i].curves()[j].y()[k]))
+              if (std::isfinite(plots[i].curves()[j].x()[k]) &&
+                  std::isfinite(plots[i].curves()[j].y()[k]))
                 cpgpt1(plots[i].curves()[j].x()[k], plots[i].curves()[j].y()[k],
                        plots[i].curves()[j].symbol());
             }
