@@ -1,14 +1,19 @@
-PROG:=demo
+PROGS:=demo
 CPP_FILES:=$(wildcard *.cpp)
 OBJ_FILES:=$(patsubst %.cpp,%.o,$(CPP_FILES))
-CPPFLAGS:=-I../
+DEP_FILES:=deps.d
+CPPFLAGS:=-I../ -MMD -MF $(DEP_FILES)
 LIBS:=../libccpgplot.a $(LIB_PGPLOT) -lpgplot -lcpgplot -L/opt/X11/lib -lX11 -lX11 $(LIB_EXTRA)
 
+all: $(PROGS)
+
+-include $(DEP_FILES)
+
 $(PROG) : $(OBJ_FILES)
-	$(CXX) -o $(PROG) $(OBJ_FILES) $(LIBS)
+	$(CXX) -o $(PROGS) $(OBJ_FILES) $(LIBS) $(CPPFLAGS)
 
 %.o: %.cpp
 	$(CXX) -c $(CPPFLAGS) $<
 
 clean:
-	$(RM) *.o $(PROG)
+	$(RM) $* $(DEP_FILES) $(OBJ_FILES) $(PROGS)
